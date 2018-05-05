@@ -1,0 +1,2 @@
+# NicePractices
+some nice coding
