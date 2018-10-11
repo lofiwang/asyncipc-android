@@ -1,7 +1,9 @@
-package com.lofiwang.rpcserviceutils;
+package com.lofiwang.ipcserviceutils;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.lofiwang.rpcserviceutils.R;
 
 public class MainActivity extends AppCompatActivity {
 

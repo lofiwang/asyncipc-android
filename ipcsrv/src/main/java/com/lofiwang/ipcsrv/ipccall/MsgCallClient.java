@@ -1,9 +1,9 @@
-package com.lofiwang.rpcsrv.ipccall;
+package com.lofiwang.ipcsrv.ipccall;
 
 import android.content.Context;
 import android.os.Message;
 
-import com.lofiwang.rpcsrv.base.MsgClient;
+import com.lofiwang.ipcsrv.base.MsgClient;
 
 import java.util.WeakHashMap;
 

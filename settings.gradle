@@ -1,1 +1,1 @@
-include ':app', ':rpcsrv'
+include ':app', ':ipcsrv'

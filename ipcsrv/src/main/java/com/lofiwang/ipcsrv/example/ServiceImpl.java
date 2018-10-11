@@ -1,9 +1,9 @@
-package com.lofiwang.rpcsrv.example;
+package com.lofiwang.ipcsrv.example;
 
 import android.os.Message;
 import android.os.Messenger;
 
-import com.lofiwang.rpcsrv.base.MsgPoolService;
+import com.lofiwang.ipcsrv.base.MsgPoolService;
 
 
 public class ServiceImpl extends MsgPoolService {

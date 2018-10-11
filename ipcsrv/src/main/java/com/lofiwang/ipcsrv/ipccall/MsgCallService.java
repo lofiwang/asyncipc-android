@@ -1,9 +1,9 @@
-package com.lofiwang.rpcsrv.ipccall;
+package com.lofiwang.ipcsrv.ipccall;
 
 import android.os.Message;
 import android.os.Messenger;
 
-import com.lofiwang.rpcsrv.base.MsgService;
+import com.lofiwang.ipcsrv.base.MsgService;
 
 /**
  * Created by lofiwang on 2018/10/11.

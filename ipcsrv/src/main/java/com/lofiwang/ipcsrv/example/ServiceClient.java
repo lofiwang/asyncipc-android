@@ -1,9 +1,9 @@
-package com.lofiwang.rpcsrv.example;
+package com.lofiwang.ipcsrv.example;
 
 import android.content.Context;
 import android.os.Message;
 
-import com.lofiwang.rpcsrv.base.MsgClient;
+import com.lofiwang.ipcsrv.base.MsgClient;
 
 
 /**

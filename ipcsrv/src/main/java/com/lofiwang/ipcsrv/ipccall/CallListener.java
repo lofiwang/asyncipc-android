@@ -1,4 +1,4 @@
-package com.lofiwang.rpcsrv.ipccall;
+package com.lofiwang.ipcsrv.ipccall;
 
 import android.os.Message;
 import android.os.SystemClock;
