@@ -68,12 +68,12 @@ public abstract class MsgService extends Service {
         if (DBG) {
             Log.d(TAG, "onDestroy");
         }
-        mServiceLooper.quit();
         try {
             onDestroyed();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mServiceLooper.quitSafely();
     }
 
     @Override
