@@ -1,4 +1,4 @@
-package com.lofiwang.rpcsrv;
+package com.lofiwang.rpcsrv.base;
 
 import android.app.Service;
 import android.content.Intent;

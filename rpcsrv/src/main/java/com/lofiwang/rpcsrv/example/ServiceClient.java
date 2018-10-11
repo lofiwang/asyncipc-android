@@ -3,7 +3,7 @@ package com.lofiwang.rpcsrv.example;
 import android.content.Context;
 import android.os.Message;
 
-import com.lofiwang.rpcsrv.MsgClient;
+import com.lofiwang.rpcsrv.base.MsgClient;
 
 
 /**

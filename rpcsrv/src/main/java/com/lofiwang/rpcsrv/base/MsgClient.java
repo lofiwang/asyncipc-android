@@ -1,4 +1,4 @@
-package com.lofiwang.rpcsrv;
+package com.lofiwang.rpcsrv.base;
 
 import android.content.ComponentName;
 import android.content.Context;

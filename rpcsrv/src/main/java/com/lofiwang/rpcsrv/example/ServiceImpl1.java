@@ -3,7 +3,7 @@ package com.lofiwang.rpcsrv.example;
 import android.os.Message;
 import android.os.Messenger;
 
-import com.lofiwang.rpcsrv.MsgService;
+import com.lofiwang.rpcsrv.base.MsgService;
 
 
 public class ServiceImpl1 extends MsgService {
