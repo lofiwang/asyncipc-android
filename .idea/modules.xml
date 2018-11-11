@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ipc-android.iml" filepath="$PROJECT_DIR$/ipc-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ipcsrv/ipcsrv.iml" filepath="$PROJECT_DIR$/ipcsrv/ipcsrv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/asyncipc-android.iml" filepath="$PROJECT_DIR$/asyncipc-android.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package com.lofiwang.ipcsrv.base;
+package com.cws.nps.common.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -47,6 +47,9 @@ public abstract class MsgPoolService extends Service {
                         onHandleMessage(this.mgr, this.msg);
                     }
                 };
+                if (mExecutorService.isShutdown()) {
+                    return;
+                }
                 mExecutorService.submit(task);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -60,7 +63,7 @@ public abstract class MsgPoolService extends Service {
     }
 
     @Override
-    public void onCreate() {
+    final public void onCreate() {
         // TODO: It would be nice to have an option to hold a partial wakelock
         // during processing, and to have a static startService(Context, Intent)
         // method that would launch the service & hand off a wakelock.
@@ -90,21 +93,21 @@ public abstract class MsgPoolService extends Service {
     }
 
     @Override
-    public void onDestroy() {
+    final public void onDestroy() {
         if (DBG) {
             Log.d(TAG, "onDestroy");
         }
-        mServiceLooper.quit();
-        mExecutorService.shutdownNow();
         try {
             onDestroyed();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mServiceLooper.quitSafely();
+        mExecutorService.shutdownNow();
     }
 
     @Override
-    public IBinder onBind(Intent intent) {
+    final public IBinder onBind(Intent intent) {
         if (mMessenger == null) {
             return null;
         }
@@ -112,7 +115,7 @@ public abstract class MsgPoolService extends Service {
     }
 
     @Override
-    public boolean onUnbind(Intent intent) {
+    final public boolean onUnbind(Intent intent) {
         return super.onUnbind(intent);
     }
 

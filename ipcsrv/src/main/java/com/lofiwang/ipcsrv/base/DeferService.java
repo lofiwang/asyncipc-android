@@ -1,4 +1,4 @@
-package com.lofiwang.ipcsrv.base;
+package com.cws.nps.common.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -111,12 +111,12 @@ public abstract class DeferService extends Service {
         if (DBG) {
             Log.d(TAG, "onDestroy");
         }
-        mServiceLooper.quit();
         try {
             onDestroyed();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        mServiceLooper.quitSafely();
     }
 
     @Override

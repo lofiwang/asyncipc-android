@@ -1,4 +1,4 @@
-package com.lofiwang.ipcsrv.base;
+package com.cws.nps.common.service;
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -26,11 +26,9 @@ public abstract class MsgClient {
     private boolean isConn = false;
     private static final int MSG_WHAT_REBIND = 1;
     private Handler mWorkHandler;
-
     public Handler getWorkHandler() {
         return mWorkHandler;
     }
-
     private final Handler mUiHdl = new UiHdl();
 
     private class UiHdl extends Handler {
@@ -104,7 +102,7 @@ public abstract class MsgClient {
         mClassName = className;
         Intent intent = new Intent();
         intent.setClassName(mPkgName, mClassName);
-        intent.putExtra("client", mName);
+        intent.putExtra("client",mName);
         boolean bindResult = mContext.bindService(intent, mConn, Context.BIND_AUTO_CREATE);
         if (mUiHdl.hasMessages(MSG_WHAT_REBIND)) {
             mUiHdl.removeMessages(MSG_WHAT_REBIND);

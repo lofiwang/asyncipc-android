@@ -1,4 +1,4 @@
-package com.lofiwang.ipcsrv.base;
+package com.cws.nps.common.service;
 
 import android.app.Service;
 import android.content.Intent;
@@ -30,6 +30,9 @@ public abstract class MsgService extends Service {
         @Override
         public void handleMessage(Message msgFromClient) {
             try {
+                if (!this.getLooper().getThread().isAlive()) {
+                    return;
+                }
                 onHandleMessage(msgFromClient.replyTo, msgFromClient);
             } catch (Exception e) {
                 e.printStackTrace();
