@@ -1,4 +1,4 @@
-package com.cws.nps.common.service;
+package com.lofiwang.ipcsrv.base;
 
 import android.app.Service;
 import android.content.Intent;
