@@ -18,26 +18,25 @@ package com.lofiwang.ipcsrv.util;
 
 /**
  * public class MyPooledClass {
- * <p>
- * private static final SynchronizedPool<MyPooledClass> sPool =
- * new SynchronizedPool<MyPooledClass>(10);
- * <p>
- * public static MyPooledClass obtain() {
- * MyPooledClass instance = sPool.acquire();
- * return (instance != null) ? instance : new MyPooledClass();
- * }
- * <p>
- * public void recycle() {
- * // Clear state if needed.
- * sPool.release(this);
- * }
+ *
+ *     private static final SynchronizedPool<MyPooledClass> sPool =
+ *             new SynchronizedPool<MyPooledClass>(10);
+ *
+ *     public static MyPooledClass obtain() {
+ *         MyPooledClass instance = sPool.acquire();
+ *         return (instance != null) ? instance : new MyPooledClass();
+ *     }
+ *
+ *     public void recycle() {
+ *          // Clear state if needed.
+ *          sPool.release(this);
+ *     }
  * }
  */
 public final class Pools {
 
     public static interface Pool<T> {
         public T acquire();
-
         public boolean release(T instance);
     }
 
@@ -48,7 +47,6 @@ public final class Pools {
         private final Object[] mPool;
 
         private int mPoolSize;
-
         public SimplePool(int maxPoolSize) {
             if (maxPoolSize <= 0) {
                 throw new IllegalArgumentException("The max pool size must be > 0");
