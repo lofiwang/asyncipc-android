@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<magazine>
+    <path>jhjhjhjhjh</path>
+    <wid>hjkhjkhjhk</wid>
+    <language>
+        <en>jhjkhkhjkhjk</en>
+    </language>
+</magazine>
+<magazine>
+    <path>jhjkhkjhh</path>
+    <wid>jhjkhjkhj</wid>
+    <language>
+        <en>hjkhjkhkhjk</en>
+    </language>
+</magazine>
