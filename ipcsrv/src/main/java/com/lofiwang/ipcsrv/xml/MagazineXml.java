@@ -17,7 +17,14 @@ import java.io.InputStream;
  */
 
 public class MagazineXml {
+    private static final String MAGAZINE_BASE_DIR = "system/theme/lockscreen/magazine";
+    private static final String MAGAZINE_IMG_DIR = "img";
+    private static final String MAGAZINE_DES_FILE = "magazine_description.txt";
+
+    private static final String MAGAZINE_DES_FILE_PATH = MAGAZINE_BASE_DIR + File.separator + MAGAZINE_DES_FILE;
+
     private static final String TAG = "MagazineXml";
+
     private void readMagazine(File magazineFile) {
         FileReader magazineReader = null;
         try {
@@ -59,7 +66,7 @@ public class MagazineXml {
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
-
+            e.printStackTrace();
         } finally {
 
         }
