@@ -2,15 +2,16 @@ package com.lofiwang.ipcserviceutils;
 
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Message;
 import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.CharArrayReader;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.channels.DatagramChannel;
 
 /**
@@ -25,6 +26,7 @@ public class VpnTest {
     private final SocketAddress serverAddress = new InetSocketAddress(mServerName, mServerPort);
     private DatagramChannel datagramChannel;
     private static VpnTest sInstance = null;
+    private ByteBuffer byteBuffer = null;
     private TimerHandler timerHandler = new TimerHandler(new TimerHandler.TimerCallback() {
         @Override
         public void onStarted() {
@@ -33,10 +35,17 @@ public class VpnTest {
 
         @Override
         public void onTimer() {
-            mWorkHandler.post(new Runnable() {
+            mSendHandler.post(new Runnable() {
                 @Override
                 public void run() {
                     sendData("current time:" + SystemClock.elapsedRealtime());
+                }
+            });
+            mReceiveHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    receiveData();
+
                 }
             });
         }
@@ -46,24 +55,32 @@ public class VpnTest {
 
         }
     });
-    private Handler mWorkHandler = null;
+    private Handler mSendHandler = null;
+    private Handler mReceiveHandler = null;
 
     private VpnTest() {
-        HandlerThread ht = new HandlerThread(TAG + "VpnTest");
+        HandlerThread ht = new HandlerThread(TAG + "VpnTest send");
         ht.start();
-        mWorkHandler = new Handler(ht.getLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
+        HandlerThread ht1 = new HandlerThread(TAG + "VpnTest receive");
+        ht1.start();
 
-            }
-        };
+        mSendHandler = new Handler(ht.getLooper());
+        mReceiveHandler = new Handler(ht1.getLooper());
 
         timerHandler.setPeriod(5000);
         timerHandler.startDelayed(0);
-        mWorkHandler.post(new Runnable() {
+        mSendHandler.post(new Runnable() {
             @Override
             public void run() {
                 sendData("current time:" + SystemClock.elapsedRealtime());
+
+            }
+        });
+        mReceiveHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                receiveData();
+
             }
         });
     }
@@ -80,15 +97,16 @@ public class VpnTest {
     }
 
     void connectServer() {
-        Log.d(TAG,"connectServer");
+        Log.d(TAG, "connectServer");
         try {
             datagramChannel = DatagramChannel.open();
             datagramChannel.connect(serverAddress);
             datagramChannel.configureBlocking(false);
-            Log.d(TAG,"connectServer ok");
+            byteBuffer = ByteBuffer.allocate(1024);
+            Log.d(TAG, "connectServer ok");
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d(TAG,"connectServer io exception");
+            Log.d(TAG, "connectServer io exception");
             if (datagramChannel != null) {
                 if (!datagramChannel.isConnected()) {
                     try {
@@ -102,15 +120,34 @@ public class VpnTest {
     }
 
     void sendData(String data) {
-        Log.d(TAG,"sendData");
+        Log.d(TAG, "sendData");
         if (datagramChannel != null && datagramChannel.isConnected()) {
-            Log.d(TAG,"write data");
+            Log.d(TAG, "write data");
             if (!TextUtils.isEmpty(data)) {
                 try {
                     datagramChannel.write(ByteBuffer.wrap(data.getBytes()));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        } else {
+            connectServer();
+        }
+    }
+
+    void receiveData() {
+        Log.d(TAG, "receiveData");
+        if (datagramChannel != null && datagramChannel.isConnected()) {
+            Log.d(TAG, "read data");
+            try {
+                if (byteBuffer != null) {
+                    int count = datagramChannel.read(byteBuffer);
+                    byte[] bytes = byteBuffer.array();
+                    String readStr = new String(bytes,0,count);
+                    Log.d(TAG, "read data:" + readStr);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         } else {
             connectServer();
